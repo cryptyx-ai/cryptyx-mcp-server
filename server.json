@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.cryptyx-ai/cryptyx-mcp-server",
+  "description": "CRYPTYX — the conviction engine for autonomous crypto trading agents. 22 tools across 376 metrics, multi-factor backtesting, signal persistence, and regime analysis.",
+  "repository": {
+    "url": "https://github.com/cryptyx-ai/cryptyx-mcp-server",
+    "source": "github"
+  },
+  "version": "0.4.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@cryptyx/mcp-server",
+      "version": "0.4.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "CRYPTYX API key — get one at https://cryptyx.ai",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "name": "CRYPTYX_API_KEY"
+        },
+        {
+          "description": "Override API base URL (default: https://cryptyx.ai)",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false,
+          "name": "CRYPTYX_API_URL"
+        }
+      ]
+    }
+  ]
+}

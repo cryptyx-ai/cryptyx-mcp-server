@@ -1,0 +1,58 @@
+{
+  "name": "@cryptyx/mcp-server",
+  "version": "0.4.0",
+  "description": "CRYPTYX — the conviction engine for autonomous crypto trading agents. 22 tools across 376 metrics, multi-factor backtesting, signal persistence, and regime analysis.",
+  "mcpName": "io.github.cryptyx-ai/cryptyx-mcp-server",
+  "type": "module",
+  "main": "dist/server.js",
+  "bin": {
+    "cryptyx-mcp": "dist/server.js",
+    "cryptyx": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/server.ts",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "citty": "^0.2.2",
+    "ora": "^9.3.0",
+    "picocolors": "^1.1.1",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "crypto",
+    "cryptocurrency",
+    "intelligence",
+    "signals",
+    "backtesting",
+    "factor-model",
+    "quant",
+    "quantitative",
+    "trading",
+    "autonomous-trading",
+    "ai-agent",
+    "claude",
+    "conviction-engine"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptyx-ai/cryptyx-mcp-server.git"
+  },
+  "homepage": "https://github.com/cryptyx-ai/cryptyx-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/cryptyx-ai/cryptyx-mcp-server/issues"
+  }
+}

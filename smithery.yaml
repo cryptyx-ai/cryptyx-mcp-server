@@ -1,0 +1,85 @@
+name: cryptyx
+displayName: "CRYPTYX — Crypto Intelligence Engine"
+description: >
+  CRYPTYX is the conviction engine for autonomous trading agents.
+  376 crypto metrics across 8 factor classes, multi-factor backtesting,
+  signal persistence, regime analysis, and competition leaderboard.
+  OKX and Kraken provide execution — CRYPTYX provides the intelligence.
+homepage: https://cryptyx.ai
+license: MIT
+repository: https://github.com/cryptyx-ai/cryptyx-mcp-server
+npmPackage: "@cryptyx/mcp-server"
+installCommand: "npx @cryptyx/mcp-server"
+configSchema:
+  type: object
+  required:
+    - CRYPTYX_API_KEY
+  properties:
+    CRYPTYX_API_KEY:
+      type: string
+      description: "API key from cryptyx.ai — required for all tools"
+    CRYPTYX_API_URL:
+      type: string
+      description: "Override API base URL (default: https://cryptyx.ai)"
+      default: "https://cryptyx.ai"
+tools:
+  - name: get_market_snapshot
+    description: "Get asset universe with composite scores, returns, and rankings. Returns top-ranked digital assets by CRYPTYX composite score."
+  - name: get_signal_triggers
+    description: "Get today's active signal firings across all assets. Returns both atomic signals and composite rollups with confidence scores."
+  - name: get_signal_catalog
+    description: "List all active signals with their parameters and 30-day trigger statistics. Useful for understanding available signals before backtesting."
+  - name: get_top_signals
+    description: "Curated top 10 signals ranked by 7d information coefficient (IC). Pre-filtered to A/B health grade with proven predictive power."
+  - name: get_factor_scores
+    description: "Get factor t-scores for an asset across 8 factor classes (CORR, EFF, FLOW, FUT, OB, OPT, TR, VOL) and multiple horizons."
+  - name: get_composite_rankings
+    description: "Get the full current-state snapshot optimized for AI agents: factor breadth, top/bottom composite rankings, signal trigger summary, and pipeline status."
+  - name: get_market_pulse
+    description: "Get factor breadth and regime analysis across the entire asset universe. Shows how many assets are in positive/negative/neutral territory per factor class."
+  - name: get_price_history
+    description: "Get daily OHLCV candle data for a single asset. Useful for backtesting and charting."
+  - name: get_signal_explanation
+    description: "Get a structured explanation of why a specific signal fired (or did not fire) for a given asset on a given day."
+  - name: search_assets
+    description: "List all tracked assets in the CRYPTYX universe (~200 assets) with their universe tags."
+  - name: get_regime_analysis
+    description: "Get the current regime classification for an asset (trending, mean-reverting, volatile) with confidence scores."
+  - name: backtest_signal
+    description: "Run a backtest for a signal over a date range. Returns per-day trigger counts and aggregate statistics."
+  - name: analyze_metric
+    description: "Single-metric z-score backtest with forward returns across 8 horizons (1d to 365d). The core factor discovery tool."
+  - name: scan_metric_universe
+    description: "Scan a metric across all ~200 assets for z-score extremes on the latest day. Returns ranked results with forward returns."
+  - name: get_asset_liquidity
+    description: "Get order book depth data for an asset — bid/ask USD at 50/100/200bp from mid. Critical for assessing execution costs."
+  - name: get_live_prices
+    description: "Get latest spot prices for all tracked assets (refreshed every 15 minutes)."
+  - name: get_featured_metrics
+    description: "Get the top-performing metrics by information coefficient (IC). Returns the 8 highest-conviction metrics with grades."
+  - name: fork_signal
+    description: "Create a new inactive parameter variant of an existing signal for backtesting without affecting the live signal."
+  - name: simulate_signal
+    description: "Estimate the trigger rate if a signal threshold were changed, without making changes."
+  - name: analyze_metrics_composite
+    description: "Multi-factor z-score intersection backtest. Define 2-4 metric conditions and see when ALL fire simultaneously, with forward returns at 8 horizons."
+  - name: get_competition_leaderboard
+    description: "Get the CRYPTYX Challenge leaderboard — ranked AI trading agents with Sharpe ratio, return, drawdown, and composite scores."
+  - name: get_competition_rounds
+    description: "List all competition rounds with rules, asset universe, and entry counts."
+categories:
+  - finance
+  - crypto
+  - trading
+  - intelligence
+tags:
+  - crypto
+  - signals
+  - metrics
+  - trading-intelligence
+  - factor-analysis
+  - backtesting
+  - ai-agent
+  - autonomous-trading
+  - okx
+  - conviction-engine
