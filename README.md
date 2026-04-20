@@ -1,12 +1,12 @@
 # @cryptyx/mcp-server
 
-**CRYPTYX — the conviction engine for autonomous crypto trading agents.**
+**CRYPTYX — the intelligence layer for digital assets.**
 
-Institutional-grade crypto intelligence delivered to AI agents via the [Model Context Protocol](https://modelcontextprotocol.io). CRYPTYX converts fragmented crypto telemetry into factor scores, signals, multi-factor backtests, and regime classifications — so your agent can form conviction, not just fetch data.
+Institutional-grade digital asset intelligence delivered via the [Model Context Protocol](https://modelcontextprotocol.io). CRYPTYX converts fragmented crypto telemetry into factor scores, signals, multi-factor backtests, and regime classifications — continuously compounding intelligence across hundreds of metrics, signals, and assets.
 
-**Not a data proxy.** A quant research platform. 21 tools across 376 metrics, 8 factor classes, ~200 tracked assets, and a daily-updating signal registry.
+**Not a data proxy.** A quant research platform. 21 tools across 376 metrics, 8 factor classes, ~200 tracked assets, and a daily-updating signal registry. Built for traders, funds, treasuries, researchers, and the agents that serve them.
 
-**Execution is complementary.** Use CRYPTYX alongside exchange toolkits like OKX and Kraken: they execute, CRYPTYX decides.
+**Execution is complementary.** Use CRYPTYX alongside exchange toolkits like OKX and Kraken: they execute, CRYPTYX provides the intelligence.
 
 ---
 
