@@ -1,0 +1,77 @@
+name: cryptyx
+displayName: "CRYPTYX — Digital Asset Intelligence"
+description: >
+  CRYPTYX — Digital Asset Intelligence. Institutional-grade quant intelligence for digital assets. Scan the market on hundreds of metrics, study every prior instance of a move, and build and backtest the strategies your agent runs.
+  The same tools as the remote MCP at https://mcp.cryptyx.ai/api/mcp, run locally over stdio with a
+  cx_ API key. Agent plugin for Claude Code, Grok Build and other hosts: https://github.com/cryptyx-ai/agents.
+  Execution stays with you: CRYPTYX is venue-neutral and the user chooses the venue.
+remoteUrl: https://mcp.cryptyx.ai/api/mcp
+agentPlugin: https://github.com/cryptyx-ai/agents
+homepage: https://cryptyx.ai
+license: MIT
+repository: https://github.com/cryptyx-ai/cryptyx-mcp-server
+npmPackage: "@cryptyx/mcp-server"
+installCommand: "npx @cryptyx/mcp-server"
+configSchema:
+  type: object
+  required:
+    - CRYPTYX_API_KEY
+  properties:
+    CRYPTYX_API_KEY:
+      type: string
+      description: "CRYPTYX API key (cx_...) from https://cryptyx.ai/account. Required for every tool."
+    CRYPTYX_API_URL:
+      type: string
+      description: "Override API base URL (default: https://cryptyx.ai)"
+      default: "https://cryptyx.ai"
+# BEGIN generated tools
+tools:
+  - name: get_cryptyx_overview
+    title: "CRYPTYX Overview"
+    description: "Orientation for broad or unclear asks (\"what can you do?\"): what CRYPTYX is, goal-based starting points with ready-to-use prompts (accumulate, take profit, trade short-term, catch statistically significant shifts, hold long-term, build and test strategies), the six capabilities, the 8 horizons and the free-tier tools. Static, instant and free. Reply briefly and let the user pick a goal. When the user already names an asset or a goal, go straight to the matching tool instead."
+  - name: get_coin_study
+    title: "Asset Study"
+    description: "THE STUDY for one asset, the main read for an asset the user holds or watches: tactical (7-14 day) and structural (60-180 day) lenses across factor classes, each reading with its z-score against the asset's own history, its tag and market percentile, and each lens state with the rule that set it (`state_basis`). Tactical readings include the 7- and 14-day returns, spot volume and liquidations; structural readings include the 90- and 180-day returns; a `long_term` block gives the 365-day horizon. Plus where today stands in its own return history, risk, and short-term volatility (7-day realised volatility and whether it is expanding or compressing). This is today's read only: for the historical outcomes of similar readings or moves, follow with `get_episode_study`. Call once per asset."
+  - name: get_episode_study
+    title: "Episode Study"
+    description: "Prior-instance study for one asset: every previous instance when its readings met a condition, and the forward returns after each one at 7, 30 and 90 days. Pick a preset (the validated V1 questions) or, on paid plans and pay-per-call, pass your own z-score conditions. Returns today's readings, a 0-3 conviction check (volume, open interest, volatility expansion), where today ranks among past episodes, the closest prior instances, splits that refine the answer (by structure, participation or leverage) and, for BTC and ETH, options readings (skew, term structure, options open interest). Every episode row carries return, max gain, max dip, drawdown and volatility; summaries compare with the asset's all-days base rate (median, hit rate, t-stat, profit factor, random-entry test) and carry a small-sample label below 20 episodes. All numbers are computed by the engine: quote them, never recompute. History, not a forecast."
+  - name: check_coverage
+    title: "Check Asset Coverage"
+    description: "Check which assets CRYPTYX covers before running other tools: per asset, whether it is covered. Free. Use when the user names assets you have not checked yet, or a tool reported an asset as not covered."
+  - name: get_data_liveness
+    title: "Data Freshness"
+    description: "When each CRYPTYX data source last updated, whether it is current, and when the next update is expected. Free. Use when the user asks how fresh the data is, or before quoting \"today\" readings."
+  - name: get_price_history
+    title: "Price History"
+    description: "Daily OHLCV candles for a single asset — RAW USD prices and volume, not normalized scores. Use when the user asks about price levels, recent performance, or needs a chart. Pair with `get_coin_study` to see whether a move is extreme against the asset's own history (price gives the move; the study says whether it matters)."
+  - name: analyze_metric
+    title: "Analyze a Metric"
+    description: "Single-metric z-score event-study backtest: \"when this metric crossed threshold X historically, what were the forward returns?\" Returns sample count, hit rate, and mean/median forward returns across 8 horizons (1d-365d). NOT a current-state read — this analyzes historical events. Core tool for testing a thesis. Each horizon carries base_median_return and base_hit_rate (the every-day result for the asset over the same period) with median_vs_base and hit_rate_vs_base: lead with those, not the raw hit rate. Report n_triggers (episodes), relay summary.warnings verbatim, and show every horizon rather than only best_horizon, which is picked after the fact. Readings pinned at the ±10 z cap are excluded as data artefacts (n_pinned_excluded). Pair with `get_featured_metrics` to find which metrics have the strongest predictive power, then drill into specific assets with this tool."
+  - name: scan_metric_universe
+    title: "Scan Metric Universe"
+    description: "Scan a metric across every asset CRYPTYX covers (the set `check_coverage` reports; stablecoins and gold-backed tokens such as XAUT and PAXG excluded) for z-score extremes TODAY. Returns which assets currently sit at extreme z-scores relative to their own history, with each asset's rank across the market and its latest price and volume. Use to find outliers — e.g. 'which assets have the most extreme funding rate right now?'\n\nMANDATORY: read `health` before citing any predictive claim:\n• `health.grade` — A/B reliable, C marginal, D/F/U unreliable. If D/F/U, present as raw observation with caveat.\n• `health.is_anti_predictive` — if true, the metric historically predicts the OPPOSITE of what you'd expect.\n• `health.sample_sufficient` — needs n_obs_7d >= 30 to be reliable.\nIf health is poor, say 'this metric shows X at extreme levels, but the metric has limited predictive reliability' — do NOT present it as alpha."
+  - name: get_live_prices
+    title: "Live Prices"
+    description: "Latest spot prices (refreshed every 15 minutes). RAW USD prices, not normalized scores; `pct_1h`, `pct_24h` and `pct_7d` are percentages (5 means 5%). Pass `assets` to get only the assets you need. Use when the user asks \"what is X trading at?\" or needs current price context."
+  - name: get_featured_metrics
+    title: "Featured Metrics"
+    description: "Metric discovery — metrics ranked by information coefficient (IC). Returns the 8 highest-IC A/B-grade metrics plus the single best metric by composite IC*hit_rate score. When `asset` is specified, rankings use per-asset TIME-SERIES IC (predictive power for that specific asset) instead of cross-sectional IC (ranking power across all assets). A metric can be CS Grade F but TS Grade A for a specific asset — always specify asset when analyzing a single token.\n\nWorkflow: (1) call this tool to see which metrics have ranked highest by IC, (2) `scan_metric_universe` on a top metric to find which assets are at extremes today, (3) `analyze_metric` on a specific asset to see the historical outcomes when this metric hit extreme levels, (4) `analyze_metrics_composite` to test 2-3 top metrics together. IC is measured in-sample; treat a ranking as a lead to test, not a validated edge."
+  - name: analyze_metrics_composite
+    title: "Analyze Combined Metric Conditions"
+    description: "Multi-factor thesis tester. Define 2-4 metric conditions and see when ALL held at once in history, with forward returns across 8 horizons. Combining conditions raises specificity but shrinks the sample; test whether the combination beats each condition alone and the base rate. Each horizon carries base_median_return and base_hit_rate (the every-day result for the asset over the same period) with median_vs_base and hit_rate_vs_base: lead with those, not the raw hit rate. Report n_triggers (episodes), relay summary.warnings verbatim, and show every horizon rather than only best_horizon, which is picked after the fact. Readings pinned at the ±10 z cap are excluded as data artefacts (n_pinned_excluded).\n\nExample patterns to test (starting ideas, not results):\n• Capitulation reversal: a volatility spike with heavy taker selling and funding stress.\n• Efficiency breakout: high trend efficiency while price holds well above its longer-term moving average.\n• Stealth accumulation: net taker buying while volatility stays compressed.\n\nEach threshold is a z-score against the asset's own history; the caller sets it. Take every `metric_id` from a CRYPTYX response rather than guessing one: `get_featured_metrics` lists today's strongest metrics, and each reading inside `get_coin_study` carries its `metric_id` next to its plain-English `_display` name. Pick conditions there, then test where they hold together on one asset with this tool."
+# END generated tools
+categories:
+  - finance
+  - crypto
+  - trading
+  - intelligence
+tags:
+  - crypto
+  - signals
+  - metrics
+  - trading-intelligence
+  - factor-analysis
+  - backtesting
+  - ai-agent
+  - digital-assets
+  - quant

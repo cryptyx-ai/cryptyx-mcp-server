@@ -1,0 +1,66 @@
+{
+  "name": "@cryptyx/mcp-server",
+  "version": "0.12.3",
+  "description": "CRYPTYX — Digital Asset Intelligence. Institutional-grade quant intelligence for digital assets. Scan the market on hundreds of metrics, study every prior instance of a move, and build and backtest the strategies your agent runs.",
+  "mcpName": "io.github.cryptyx-ai/cryptyx-mcp-server",
+  "type": "module",
+  "main": "dist/server.js",
+  "bin": {
+    "cryptyx-mcp": "dist/server.js",
+    "cryptyx": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "skills",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc",
+    "dev": "tsx src/server.ts",
+    "start": "node dist/server.js",
+    "test": "npm run build && node scripts/smoke-test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "citty": "^0.2.2",
+    "ora": "^9.3.0",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "crypto",
+    "intelligence",
+    "signals",
+    "backtesting",
+    "factor-model",
+    "quant",
+    "quantitative",
+    "trading",
+    "ai-agent",
+    "claude",
+    "digital-assets",
+    "stdio"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptyx-ai/cryptyx-mcp-server.git"
+  },
+  "homepage": "https://github.com/cryptyx-ai/cryptyx-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/cryptyx-ai/cryptyx-mcp-server/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
